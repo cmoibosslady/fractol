@@ -1,34 +1,57 @@
+MAKE = make
+
+MAKEFLAGS = 
+
 CC = cc
 
 CFLAG = -Wall -Werror -Wextra
 
-SRC = receive_and_open.c colors.c julia.c mandelbrot.c math.c complex_math.c events_and_errors.c moves.c zoom.c
+SRCS = receive_and_open.c \
+	  colors.c \
+	  julia.c \
+	  mandelbrot.c \
+	  math.c \
+	  complex_math.c \
+	  events_and_errors.c \
+	  moves.c \
+	  zoom.c
 
-OBJDIR = build
+HEADER = fract_ol.h
 
-OBJS = $(SRC:.c=$(OBJDIR).o)
+
+SRC_DIR = sources
+
+OBJ_DIR = build
+
+HEADER_DIR = includes
+
+
+OBJS = $(SRCS:%.c=${OBJ_DIR}/%.o)
+
+
+INCLUDE = -I${HEADER_DIR}/ -Ilibft/include/
 
 NAME = fractol
 
 all: $(NAME)
 
 libft:
-	make -C libft/
+	@${MAKE} -C libft/
 
 $(NAME): $(OBJS)
-	make libft
+	@${MAKE} libft
 	$(CC) $(CFLAG) -lmlx -L mlx/ -lXext -lX11 -o $(NAME) $(OBJS) $(LIBFT) mlx/libmlx_Linux.a
 
-$(OBJDIR)/%.o: %.c
-	mkdir $(OBJDIR)
-	$(CC) $(CFLAG) -I mlx/ -c $< -o $@
+${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAG) $(INCLUDE) -I mlx/ -c $< -o $@
 
 clean:
-	cd libft && make clean
-	rm -f $(OBJS)
+	cd libft && ${MAKE} clean
+	rm -df $(OBJ_DIR)
 
 fclean: clean
-	cd libft && make fclean
+	cd libft && ${MAKE} fclean
 	rm -f $(NAME)
 
 re: fclean all
