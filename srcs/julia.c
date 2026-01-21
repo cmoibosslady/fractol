@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include "../includes/fract_ol.h"
 
 bool	inside_circle(t_num *z)
 {
@@ -92,7 +92,7 @@ void	julia_frac(t_img *image, int argc, char **argv)
 			end_program(image);
 	}
 	else
-		ft_printf("Switching to default parameters : seed = -1.0 + 0.0i\n");
+		printf("Switching to default parameters : seed = -1.0 + 0.0i\n");
 	image->fract = init_julia;
 	init_julia(image);
 	events(image, image->win);

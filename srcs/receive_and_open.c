@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 	t_img	*image;
 
 	if (argc == 1)
-		return (ft_printf("parameters:\nJulia\nMandelbrot\n"));
+		return (printf("parameters:\nJulia\nMandelbrot\n"));
 	mlx_ptr = mlx_init();
 	if (!mlx_ptr)
 		return (0);
@@ -100,5 +100,5 @@ int	main(int argc, char **argv)
 	else if (!ft_strncmp(argv[1], "Mandelbrot", 10))
 		mandelbrot_frac(image);
 	else
-		ft_printf("invalid args\nparameters:\nJulia\nMandelbrot\n");
+		printf("invalid args\nparameters:\nJulia\nMandelbrot\n");
 }

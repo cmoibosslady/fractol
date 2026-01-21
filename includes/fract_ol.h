@@ -16,8 +16,9 @@
 # define HEIGHT 1000
 # define WIDTH 1000
 
-# include "libft/libft.h"
-# include <mlx.h>
+# include "../libft/includes/libft.h"
+# include "../minilibx-linux/mlx.h"
+
 # include <math.h>
 # include <stdbool.h>
 

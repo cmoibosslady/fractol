@@ -1,6 +1,9 @@
 MAKE = make
-
-MAKEFLAGS = 
+MAKEFLAGS += --no-print-directory
+RED = $(shell tput setaf 1)
+GREEN = $(shell tput setaf 2)
+CYAN = $(shell tput setaf 6)
+RESET = $(shell tput setaf 255)
 
 CC = cc
 
@@ -18,8 +21,7 @@ SRCS = receive_and_open.c \
 
 HEADER = fract_ol.h
 
-
-SRC_DIR = sources
+SRC_DIR = srcs
 
 OBJ_DIR = build
 
@@ -28,31 +30,39 @@ HEADER_DIR = includes
 
 OBJS = $(SRCS:%.c=${OBJ_DIR}/%.o)
 
+INCLUDE = -I ${HEADER_DIR}/
 
-INCLUDE = -I${HEADER_DIR}/ -Ilibft/include/
+LIBFT = libft/libft.a
 
 NAME = fractol
+
+MINILIBX = minilibx-linux/
+
 
 all: $(NAME)
 
 libft:
 	@${MAKE} -C libft/
 
+minilibx:
+	@${MAKE} -C ${MINILIBX}
+
 $(NAME): $(OBJS)
 	@${MAKE} libft
-	$(CC) $(CFLAG) -lmlx -L mlx/ -lXext -lX11 -o $(NAME) $(OBJS) $(LIBFT) mlx/libmlx_Linux.a
+	@${MAKE} minilibx
+	$(CC) $(CFLAG) -L$(MINILIBX) -lmlx -lXext -lX11 -lm -o $(NAME) $(OBJS) $(LIBFT) $(MINILIBX)libmlx_Linux.a
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAG) $(INCLUDE) -I mlx/ -c $< -o $@
+	$(CC) $(CFLAG) $(INCLUDE) -I libft/ -I mlx/ -c $< -o $@
 
 clean:
 	cd libft && ${MAKE} clean
-	rm -df $(OBJ_DIR)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	cd libft && ${MAKE} fclean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 

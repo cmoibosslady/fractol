@@ -7,10 +7,10 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:58:52 by jlepany           #+#    #+#             */
 /*   Updated: 2025/02/27 14:11:28 by jlepany          ###   ########.fr       */
-/*                                                            :q              */
+/*                                                            	              */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include "../includes/fract_ol.h"
 
 int	keyhook(int keycode, void *image)
 {
@@ -27,7 +27,7 @@ int	keyhook(int keycode, void *image)
 	else if (keycode == 32)
 		back_to_center(image);
 	else
-		ft_printf("not supported, use mouse roll or arrows\n");
+		printf("not supported, use mouse roll or arrows\n");
 	return (0);
 }
 
