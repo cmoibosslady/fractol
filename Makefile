@@ -36,16 +36,24 @@ LIBFT = libft/libft.a
 
 NAME = fractol
 
-MINILIBX = minilibx-linux/
-
+MINILIBX_URL = https://github.com/42Paris/minilibx-linux 
+MINILIX_PATH = $(CURDIR)/minilibx
 
 all: $(NAME)
 
 libft:
 	@${MAKE} -C libft/
 
-minilibx:
-	@${MAKE} -C ${MINILIBX}
+setup-mlx: $(MINILIX_PATH)/build/mlx.a
+	@echo "MiniLibXalready built."
+
+$(MINILIBX_PATH)/build/mlx.a: setup-mlx | $(MINILIBX_PATH)
+	@echo "--- Cloning external repository ---"
+	git clone --depth 1 $(MINILIBX_URL) $(CURDIR)/external-lib-src-temp \
+		&& rm -rf $(EXTERNAL_PATH)/build mlx.a \
+		&& mv external-lib-src-temp $(MINILIBX_PATH) \
+		@echo "--- Compiling external library ---"
+	$(MAKE) -C $(MINILIBX_PATH)
 
 $(NAME): $(OBJS)
 	@${MAKE} libft
@@ -57,11 +65,10 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 	$(CC) $(CFLAG) $(INCLUDE) -I libft/ -I mlx/ -c $< -o $@
 
 clean:
-	cd libft && ${MAKE} clean
 	rm -rf $(OBJ_DIR)
+	rm -rf $(EXTERNAL_PATH)/build libs/external-lib-src-temp
 
 fclean: clean
-	cd libft && ${MAKE} fclean
 	rm -rf $(NAME)
 
 re: fclean all
