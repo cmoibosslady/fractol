@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   julia.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/09 10:19:39 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:06:38 by jlepany          ###   ########.fr       */
+/*   Created: 2026/05/09 13:58:18 by jlepany           #+#    #+#             */
+/*   Updated: 2026/05/09 15:06:01 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef JULIA_H
+# define JULIA_H
 
-# include <stdio.h>
+# include "main.h"
+# include "complex_nb.h"
 
-double	ft_atod(const char *str);
-void	ft_bzero(void *mem, size_t size);
-int		ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlen(const char *str);
+void	init_julia(t_xserv *server, int ac, char *av[]);
+bool	inside_circle(t_cnb *z);
+int		inside_julia(t_cnb *z, t_cnb *seed);
+void	julia(t_xserv *server, t_cnb *seed);
+void	put_julia(t_xserv *server, t_cnb *seed, t_cnb *z);
 
 #endif

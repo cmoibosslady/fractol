@@ -6,53 +6,54 @@
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:58:52 by jlepany           #+#    #+#             */
-/*   Updated: 2025/02/27 14:11:28 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/09 11:59:30 by jlepany          ###   ########.fr       */
 /*                                                            	              */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#include "includes/events.h"
+#include "includes/main.h"
+#include "minilibx-linux/mlx.h"
 
-int	keyhook(int keycode, void *image)
+int	keyhook(int keycode, void *server)
 {
+	t_xserv * serv;
+
+	serv = (t_xserv *)server;
 	if ((char)keycode == 27)
-		end_program(image);
+		stop_mlx(serv);	
 	else if (keycode == 65363)
-		move_right(image);
+		move_right(serv->img_ptr);
 	else if (keycode == 65361)
-		move_left(image);
+		move_left(serv->img_ptr);
 	else if (keycode == 65364)
-		move_up(image);
+		move_up(serv->img_ptr);
 	else if (keycode == 65362)
-		move_down(image);
+		move_down(serv->img_ptr);
 	else if (keycode == 32)
-		back_to_center(image);
+		back_to_center(serv->img_ptr);
 	else
 		printf("not supported, use mouse roll or arrows\n");
 	return (0);
 }
 
-int	end_program(t_img *image)
+int	mousehook(int mousecode, int x, int y, void *server)
 {
-	mlx_destroy_image(image->mlx, image->img);
-	mlx_destroy_window(image->mlx, image->win);
-	mlx_destroy_display(image->mlx);
-	free(image->mlx);
-	free(image);
-	exit(0);
-}
+	t_xserv *serv;
 
-int	mousehook(int mousecode, int x, int y, void *image)
-{
+	serv = (t_xserv *)server;
 	if (mousecode == 4)
-		zoom(image, x, y, 1);
+		zoom(serv->img_ptr, x, y, 1);
 	if (mousecode == 5)
-		zoom(image, x, y, 0);
+		zoom(serv->img_ptr, x, y, 0);
 	return (0);
 }
 
-void	events(t_img *image, void *win_ptr)
+void	events(void *server)
 {
-	mlx_key_hook(win_ptr, keyhook, image);
-	mlx_mouse_hook(win_ptr, mousehook, image);
-	mlx_hook(win_ptr, 17, 0, end_program, image);
+	t_xserv *serv;
+	
+	serv = (t_xserv *)server;
+	mlx_key_hook(serv->win_ptr, keyhook, serv->img_ptr);
+	mlx_mouse_hook(serv->win_ptr, mousehook, serv->img_ptr);
+	mlx_hook(serv->win_ptr, 17, 0, stop_mlx(serv), serv);
 }

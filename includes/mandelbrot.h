@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   mandelbrot.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/09 10:19:39 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:06:38 by jlepany          ###   ########.fr       */
+/*   Created: 2026/05/09 14:44:16 by jlepany           #+#    #+#             */
+/*   Updated: 2026/05/09 14:45:32 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef MANDELBROT_H
+# define MANDELBROT_H
 
-# include <stdio.h>
+# include "main.h"
+# include "complex_nb.h"
 
-double	ft_atod(const char *str);
-void	ft_bzero(void *mem, size_t size);
-int		ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlen(const char *str);
+int		inside_mandelbrot(t_cnb *z, int limit);
 
 #endif

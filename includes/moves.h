@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   moves.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/09 10:19:39 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:06:38 by jlepany          ###   ########.fr       */
+/*   Created: 2026/05/09 12:03:25 by jlepany           #+#    #+#             */
+/*   Updated: 2026/05/09 12:05:15 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef MOVES_H
+# define MOVES_H
 
-# include <stdio.h>
+# include "main.h"
 
-double	ft_atod(const char *str);
-void	ft_bzero(void *mem, size_t size);
-int		ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlen(const char *str);
+void	move_rigth(t_xserv *server);
+void	move_letf(t_xserv *server);
+void	move_up(t_xserv *server);
+void	move_down(t_xserv *server);
 
 #endif

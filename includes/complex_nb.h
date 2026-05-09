@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   complex_nb.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/09 10:19:39 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:06:38 by jlepany          ###   ########.fr       */
+/*   Created: 2026/05/09 14:06:33 by jlepany           #+#    #+#             */
+/*   Updated: 2026/05/09 14:14:24 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef COMPLEX_NB_PATH
+# define COMPLEX_NB_PATH
 
-# include <stdio.h>
+typedef struct complex_nb {
+	double	real;
+	double	unreal;
+}			t_cnb;
 
-double	ft_atod(const char *str);
-void	ft_bzero(void *mem, size_t size);
-int		ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlen(const char *str);
+t_cnb	*add_complex(t_cnb *a, t_cnb b);
+t_cnb	*mul_complex(t_cnb *a, t_cnb b);
+t_cnb	*square_complex(t_cnb *z);
+double	abs_complex(t_cnb *z);
+bool	complex_nan(t_cnb *z);
 
 #endif

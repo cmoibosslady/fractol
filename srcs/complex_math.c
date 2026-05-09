@@ -6,13 +6,16 @@
 /*   By: jlepany <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:29:59 by jlepany           #+#    #+#             */
-/*   Updated: 2025/02/20 14:55:27 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/09 14:35:37 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include <math.h>
+#include <stdbool.h>
 
-bool	ft_isnan(t_num *z)
+#include "includes/complex_nb.h"
+
+bool	complex_nan(t_cnb *z)
 {
 	if (z->real != z->real)
 		return (1);
@@ -21,16 +24,16 @@ bool	ft_isnan(t_num *z)
 	return (0);
 }
 
-double	abs_complex(t_num *z)
+double	abs_complex(t_cnb *z)
 {
 	double	res;
 
 	res = z->real * z->real + z->unreal * z->unreal;
-	res = ft_sqrt(res);
+	res = sqrt(res);
 	return (res);
 }
 
-t_num	*square_complex(t_num *z)
+t_cnb	*square_complex(t_cnb *z)
 {
 	double	tmp;
 
@@ -40,14 +43,14 @@ t_num	*square_complex(t_num *z)
 	return (z);
 }
 
-t_num	*add_complex(t_num *a, t_num b)
+t_cnb	*add_complex(t_cnb *a, t_cnb b)
 {
 	a->real = a->real + b.real;
 	a->unreal = a->unreal + b.unreal;
 	return (a);
 }
 
-t_num	*mul_complex(t_num *a, t_num b)
+t_cnb	*mul_complex(t_cnb *a, t_cnb b)
 {
 	a->real = a->real * b.real;
 	a->unreal = a->real * b.real;

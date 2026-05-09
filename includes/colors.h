@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/09 10:19:39 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:06:38 by jlepany          ###   ########.fr       */
+/*   Created: 2026/05/09 11:35:09 by jlepany           #+#    #+#             */
+/*   Updated: 2026/05/09 11:46:58 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef COLORS_H
+# define COLORS_H
 
-# include <stdio.h>
+typedef struct colors_rgb {
+	unsigned char	t;
+	unsigned char	red;
+	unsigned char	green;
+	unsigned char	blue;
+} 	t_rgb;
 
-double	ft_atod(const char *str);
-void	ft_bzero(void *mem, size_t size);
-int		ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlen(const char *str);
+int		combine_color(t_rgb *color);
+void	give_nuance(t_rgb *color, int limit);
+
+// void	put_pixel_to_img(t_xserv *serv, int color, int x, int y);
 
 #endif
