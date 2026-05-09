@@ -6,11 +6,41 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:19:44 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 10:19:46 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/09 15:18:48 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
+
 #include "includes/libft.h"
+
+double	ft_atod(const char *str)
+{
+	double	res;
+	int		i;
+	int		j;
+	double	neg;
+
+	i = 0;
+	neg = 1.0f;
+	res = 0.0f;
+	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+		if (str[i++] == '-')
+			neg = -1.0f;
+	while (str[i] >= '0' && str[i] <= '9')
+		res = res * 10.0f + (double)(str[i++] - '0');
+	if (!str[i])
+		return (res * neg);
+	if (str[i] != '.')
+		return (0.0 / 0.0);
+	j = i;
+	while (str[++i] >= '0' && str[i] <= '9')
+		res += (double)(str[i] - '0') * pow(0.1f, i - j);
+	res = res * neg;
+	return (res);
+}
 
 void	ft_bzero(void *mem, size_t size)
 {

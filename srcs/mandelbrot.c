@@ -6,43 +6,38 @@
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:57:25 by jlepany           #+#    #+#             */
-/*   Updated: 2025/02/27 16:13:53 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/09 15:35:47 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include "includes/complex_nb.h"
+#include "includes/main.h"
+#include "includes/mandelbrot.h"
 
-bool	inside_mandelbrot(t_num *z, int i)
+bool	inside_mandelbrot(t_cnb *z, int i)
 {
-	if (ft_square(z->unreal, 2) > 4)
-		return (0);
-	else if (ft_square(z->unreal, 2) <= 4 && ft_square(z->real, 2) >= 4)
-		return (0);
+	if (sqrt(z->unreal) > 4)
+		return (false);
+	else if (sqrt(z->unreal) <= 4 && sqrt(z->real) >= 4)
+		return (false);
 	else if (i && abs_complex(z) > 2)
-		return (0);
+		return (false);
 	else
-		return (1);
+		return (true);
 }
 
-int	mandelbrot(t_num *seed)
+int	mandelbrot_limit(t_cnb *seed)
 {
-	t_num	*z;
+	t_cnb	z;
 	int		i;
 
 	i = 0;
-	z = ft_calloc(1, sizeof(t_num));
-	if (!z)
-	{
-		free(seed);
-		return (-1);
-	}
-	while (inside_mandelbrot(z, i) && i++ < 200 && !ft_isnan(z))
-		z = add_complex(square_complex(z), *seed);
-	free(z);
+	while (inside_mandelbrot(&z, i) && i++ < 200 && !complex_nan(&z))
+		z = *add_complex(square_complex(&z), *seed);
 	return (i);
 }
 
-void	put_mandelbrot(t_img *img, t_num *seed)
+void	put_mandelbrot(t_xserv *server, t_num *seed)
 {
 	int	limit;
 	int	x;
@@ -67,22 +62,18 @@ void	put_mandelbrot(t_img *img, t_num *seed)
 	}
 }
 
-void	init_mandelbrot(t_img *img)
+void	init_mandelbrot(t_xserv *server)
 {
-	t_num	*seed;
+	t_cnb	seed;
 
-	seed = init_complex(0.1f, 0.1f);
-	if (!seed)
-		end_program(img);
-	put_mandelbrot(img, seed);
-	free(seed);
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
-	events(img, img->win);
+	seed.real = 0.1; 
+	seed.unreal = 0.1;
+	put_mandelbrot(server, &seed);
+	mlx_put_image_to_window(server->mlx_ptr, server->win_ptr, server->img_ptr, 0, 0);
 }
 
 void	mandelbrot_frac(t_img *image)
 {
 	image->fract = init_mandelbrot;
 	init_mandelbrot(image);
-	mlx_loop(image->mlx);
 }

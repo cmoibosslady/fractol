@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:29:59 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 14:35:37 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/09 15:32:00 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 bool	complex_nan(t_cnb *z)
 {
 	if (z->real != z->real)
-		return (1);
+		return (true);
 	if (z->unreal != z->unreal)
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }
 
 double	abs_complex(t_cnb *z)

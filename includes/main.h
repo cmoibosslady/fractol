@@ -6,7 +6,7 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:59 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 13:50:33 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/09 15:22:12 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct x_server
 	void	*win_ptr;
 	void	*img_ptr;
 
-	void	(*fract)(struct x_server *server);
+	void	(*fract)(struct x_server *server, int ac, char *av[]);
 
 	char	*data;
 	int		bit;

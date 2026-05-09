@@ -6,12 +6,14 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:27 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 13:58:01 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/09 15:36:05 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
+#include "includes/events.h"
+#include "includes/julia.h"
 #include "includes/libft.h"
 #include "includes/main.h"
 #include "minilibx-linux/mlx.h"
@@ -56,11 +58,13 @@ int main(int ac, char *av[])
 		return (log_error("Too few arguments\n"));
 	ft_bzero(&server, sizeof(t_xserv));
 	if (!ft_strcmp(av[1], "mandelbrot"))
-		server.fract = &mandelbrot(&server);
+		server.init_fract = init_mandelbrot;
 	else if (!ft_strcmp(av[1], "julia") && ac == 4)
-		server.fract = &julia(&server, ac, av);
+		server.init_fract = init_julia;
 	else
 		return (log_error("Arg must be: mandelbrot or julia [x] [y]\n"));
 	if (init_mlx(&server) == false)
 		return (log_error("Cannot init mlx\n"));
+	events(server, server->win_ptr);
+	mlx_loop(server.mlx_ptr);
 }

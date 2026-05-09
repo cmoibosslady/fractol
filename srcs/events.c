@@ -1,50 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events_and_errors.c                                :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:58:52 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 11:59:30 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/09 15:38:01 by jlepany          ###   ########.fr       */
 /*                                                            	              */
 /* ************************************************************************** */
 
 #include "includes/events.h"
 #include "includes/main.h"
+#include "includes/moves.h"
+#include "includes/zoom.h"
 #include "minilibx-linux/mlx.h"
 
-int	keyhook(int keycode, void *server)
+int	keyhook(int keycode, t_xserv *server)
 {
-	t_xserv * serv;
-
-	serv = (t_xserv *)server;
 	if ((char)keycode == 27)
-		stop_mlx(serv);	
+		stop_mlx(server);	
 	else if (keycode == 65363)
-		move_right(serv->img_ptr);
+		move_right(server->img_ptr);
 	else if (keycode == 65361)
-		move_left(serv->img_ptr);
+		move_left(server->img_ptr);
 	else if (keycode == 65364)
-		move_up(serv->img_ptr);
+		move_up(server->img_ptr);
 	else if (keycode == 65362)
-		move_down(serv->img_ptr);
+		move_down(server->img_ptr);
 	else if (keycode == 32)
-		back_to_center(serv->img_ptr);
+		back_to_center(server->img_ptr);
 	else
 		printf("not supported, use mouse roll or arrows\n");
 	return (0);
 }
 
-int	mousehook(int mousecode, int x, int y, void *server)
+int	mousehook(int mousecode, int x, int y, t_xserv *server)
 {
-	t_xserv *serv;
-
-	serv = (t_xserv *)server;
 	if (mousecode == 4)
-		zoom(serv->img_ptr, x, y, 1);
+		zoom_in(server->img_ptr, x, y);
 	if (mousecode == 5)
-		zoom(serv->img_ptr, x, y, 0);
+		zoom_out(server->img_ptr, x, y);
 	return (0);
 }
 

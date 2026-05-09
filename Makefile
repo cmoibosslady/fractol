@@ -10,18 +10,26 @@ CC = cc
 CFLAG = -Wall -Werror -Wextra
 MINILIBX_FLAGS = -lmlx -lXext -lX11
 
-SRCS = main.c \
-	   receive_and_open.c \
-	   colors.c \
+SRCS = colors.c \
+	   complex_math.c \
+	   events.c \
 	   julia.c \
+	   libft.c \
+	   main.c \
 	   mandelbrot.c \
 	   math.c \
-	   complex_math.c \
-	   events_and_errors.c \
 	   moves.c \
 	   zoom.c
 
-HEADER = fract_ol.h
+HEADER = colors.h \
+		 complex_nb.h \
+		 events.h \
+		 julia.h \
+		 libft.h \
+		 main.h \
+		 mandelbrot.h \
+		 moves.h \
+		 zoom.h 
 
 SRC_DIR = srcs
 
