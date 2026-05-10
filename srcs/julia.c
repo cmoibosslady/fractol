@@ -6,7 +6,7 @@
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:24:32 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/10 16:23:44 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/10 19:22:18 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "julia.h"
 #include "mandelbrot.h"
-#include "minilibx-linux/mlx.h"
+#include "mlx.h"
 
 bool	inside_circle(t_cnb *z)
 {
@@ -66,7 +66,7 @@ void	put_julia(t_xserv *server, t_cnb *seed, t_cnb *z)
 	free(z);
 }
 
-void	julia(t_xserv *server, t_cnb *seed)
+void	generate_julia(t_xserv *server)
 {
 	t_cnb	z;
 

@@ -6,17 +6,23 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:27 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:36:05 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/10 19:25:04 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-#include "includes/events.h"
-#include "includes/julia.h"
-#include "includes/libft.h"
-#include "includes/main.h"
-#include "minilibx-linux/mlx.h"
+#include "events.h"
+#include "julia.h"
+#include "libft.h"
+#include "main.h"
+#include "mlx.h"
+
+double	conversion(int value, double d_min, double d_max, int v_max) 
+	// function to help calculate the value into a graph of a certain pixel
+{
+	return ((double)(value * (d_max - d_min) / (double)v_max) + d_min);
+}
 
 int	log_error(const char *str)
 {
@@ -40,7 +46,7 @@ bool	init_mlx(t_xserv *server)
 	return (true);
 }
 
-void	stop_mlx(t_xserv *server)
+int	stop_mlx(t_xserv *server)
 {
 	if (server->img_ptr)
 		mlx_destroy_image(server->mlx_ptr, server->win_ptr);
@@ -58,13 +64,19 @@ int main(int ac, char *av[])
 		return (log_error("Too few arguments\n"));
 	ft_bzero(&server, sizeof(t_xserv));
 	if (!ft_strcmp(av[1], "mandelbrot"))
-		server.init_fract = init_mandelbrot;
-	else if (!ft_strcmp(av[1], "julia") && ac == 4)
-		server.init_fract = init_julia;
+	{
+		init_mandelbrot(&server);
+		server.generator = init_mandelbrot;
+	}
+	else if (!ft_strcmp(av[1], "julia"))
+	{
+		init_julia(&serv, ac, av);
+		server.generator = generate_julia;
+	}
 	else
 		return (log_error("Arg must be: mandelbrot or julia [x] [y]\n"));
 	if (init_mlx(&server) == false)
 		return (log_error("Cannot init mlx\n"));
-	events(server, server->win_ptr);
+	events(&server);
 	mlx_loop(server.mlx_ptr);
 }

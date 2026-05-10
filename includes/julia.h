@@ -6,7 +6,7 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 13:58:18 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:29:05 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/10 19:21:50 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	init_julia(t_xserv *server, int ac, char *av[]);
 bool	inside_circle(t_cnb *z);
 int		inside_julia(t_cnb *z, t_cnb *seed);
-void	generate_julia(t_xserv *server, t_cnb *seed);
+void	generate_julia(t_xserv *server);
 void	put_julia(t_xserv *server, t_cnb *seed, t_cnb *z);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:59 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:22:12 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/10 19:23:48 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@
 # include <math.h>
 # include <stdbool.h>
 
+# include "complex_nb.h"
+
 typedef struct x_server
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
 
-	void	(*fract)(struct x_server *server, int ac, char *av[]);
+	void	(*generator)(struct x_server *server);
 
 	char	*data;
 	int		bit;
@@ -39,10 +41,13 @@ typedef struct x_server
 
 	double	zoom;
 
+	t_cnb	julia_seed;
+
 }	t_xserv;
 
+double	conversion(int value, double x_min, double x_max, int v_max);
 bool	init_mlx(t_xserv *server);
 int		log_error(const char *str);
-void	stop_mlx(t_xserv *server);
+int		stop_mlx(t_xserv *server);
 
 #endif
