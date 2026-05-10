@@ -6,15 +6,15 @@
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:58:52 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:38:01 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/10 17:12:28 by jlepany          ###   ########.fr       */
 /*                                                            	              */
 /* ************************************************************************** */
 
-#include "includes/events.h"
-#include "includes/main.h"
-#include "includes/moves.h"
-#include "includes/zoom.h"
-#include "minilibx-linux/mlx.h"
+#include "events.h"
+#include "main.h"
+#include "moves.h"
+#include "zoom.h"
+#include "mlx.h"
 
 int	keyhook(int keycode, t_xserv *server)
 {

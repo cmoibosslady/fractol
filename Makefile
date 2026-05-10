@@ -55,7 +55,7 @@ MINILIBX		=	$(MINILIBX_DIR)/libmlx.a
 CC				=	cc
 CFLAG			=	-Wall -Werror -Wextra \
 					-MMD -MP
-MINILIBX_FLAGS	=	-lXext -lX11
+MINILIBX_FLAGS	=	-lXext -lX11 -I$(MINILIBX_DIR)
 MATH_FLAGS		=	-lm
 
 MKDIR			=	@mkdir -vp

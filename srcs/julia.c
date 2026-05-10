@@ -6,14 +6,14 @@
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:24:32 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:06:05 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/10 16:23:44 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 
-#include "includes/julia.h"
-#include "includes/mandelbrot.h"
+#include "julia.h"
+#include "mandelbrot.h"
 #include "minilibx-linux/mlx.h"
 
 bool	inside_circle(t_cnb *z)

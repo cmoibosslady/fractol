@@ -6,14 +6,14 @@
 /*   By: jlepany <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:29:59 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:32:00 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/10 16:23:16 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdbool.h>
 
-#include "includes/complex_nb.h"
+#include "complex_nb.h"
 
 bool	complex_nan(t_cnb *z)
 {
