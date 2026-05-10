@@ -3,7 +3,7 @@
 #########################
 
 SRC_DIR			=	srcs
-INC_DIRS		=	includes
+INC_DIR			=	includes
 
 BUILD_DIR		=	build
 OBJ_DIR			=	${BUILD_DIR}/obj
@@ -24,7 +24,7 @@ SRCS 			=	colors.c \
 					moves.c \
 					zoom.c
 
-HEADER			=	colors.h \
+HEADERS			=	colors.h \
 					complex_nb.h \
 					events.h \
 					julia.h \
@@ -45,41 +45,47 @@ GREEN			=	$(shell tput setaf 2)
 CYAN			=	$(shell tput setaf 6)
 RESET			=	$(shell tput setaf 255)
 
-OBJS			=	${SRCS:${SRC_DIR}/%.c=${OBJ_DIR}/%.o}
-DEPS			=	${SRCS:${SRC_DIR}/%.c=${DEP_DIR}/%.d}
+OBJS			=	${SRCS:%.c=${OBJ_DIR}/%.o}
+DEPS			=	${SRCS:%.c=${DEP_DIR}/%.d}
 GET_DEP_PATH	=	${@:${OBJ_DIR}/%.o=${DEP_DIR}/.%d}
+
+MINILIBX_DIR	=	minilibx-linux
+MINILIBX		=	$(MINILIBX_DIR)/libmlx.a
 
 CC				=	cc
 CFLAG			=	-Wall -Werror -Wextra \
-					-MMD -MF $(GET_DEP_PATH)
-MINILIBX_FLAGS	=	-lmlx -lXext -lX11
+					-MMD -MP
+MINILIBX_FLAGS	=	-lXext -lX11
+MATH_FLAGS		=	-lm
 
 MKDIR			=	@mkdir -vp
 RM				=	@rm -vrf
 
 NAME			=	fractol
 
-MINILIBX_PATH	=	minilibx-linux
-
 #####################
 ######  RULES  ######
 #####################
 
-all: $(NAME)
+all: $(MINILIBX) $(NAME)
 
-setup-mlx: $(MINILIBX_PATH)/build/mlx.a
-	@echo "MiniLibXalready built."
+-include $(DEPS)
+
+$(MINILIBX):
+	$(MAKE) -C $(MINILIBX_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAG) -L$(MINILIBX) -lmlx -lXext -lX11 -lm -o $(NAME) $(OBJS) $(LIBFT) $(MINILIBX)libmlx_Linux.a
+	$(CC) $(CFLAG) $(MINILIBX_FLAGS) $(MATH_FLAGS) $^ -o $@
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAG) $(INCLUDE) -I libft/ -I mlx/ -c $< -o $@
+	$(MKDIR) $(dir $@) $(dir $(GET_DEP_PATH))
+	$(CC) $(CFLAG) $(MINILIBX_FLAGS) $(MATH_FLAGS) -I $(INC_DIR) \
+		-c $< -o $@ \
+		-MF $(DEP_DIR)/$(notdir $(basename $<)).d -MT $@
 
 clean:
-	rm -rf $(OBJ_DIR)
-	rm -rf $(EXTERNAL_PATH)/build libs/external-lib-src-temp
+	$(RM) $(BUILD_DIR)
+	$(MAKE) clean -C $(MINILIBX_DIR) 
 
 fclean: clean
 	rm -rf $(NAME)

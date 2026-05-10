@@ -6,13 +6,13 @@
 /*   By: jlepany <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:13:29 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 11:43:52 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/10 16:08:15 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/colors.h"
-#include "includes/libft.h"
-#include "includes/main.h"
+#include "colors.h"
+#include "libft.h"
+#include "main.h"
 
 void	put_pixel_image(t_xserv *serv, int color, int x, int y)
 {
