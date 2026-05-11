@@ -6,13 +6,13 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:19:44 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/09 15:18:48 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/11 11:37:11 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 
-#include "includes/libft.h"
+#include "libft.h"
 
 double	ft_atod(const char *str)
 {

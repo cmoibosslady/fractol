@@ -20,7 +20,6 @@ SRCS 			=	colors.c \
 				  	libft.c \
 				  	main.c \
 					mandelbrot.c \
-					math.c \
 					moves.c \
 					zoom.c
 
@@ -55,8 +54,9 @@ MINILIBX		=	$(MINILIBX_DIR)/libmlx.a
 CC				=	cc
 CFLAG			=	-Wall -Werror -Wextra \
 					-MMD -MP
-MINILIBX_FLAGS	=	-lXext -lX11 -I$(MINILIBX_DIR)
-MATH_FLAGS		=	-lm
+MINILIBX_FLAGS	=	-I$(MINILIBX_DIR)
+# FOR MACOS comment thoses falgs
+LINUX_FLAGS		=	-lm -lXext -lX11 -lmlx
 
 MKDIR			=	@mkdir -vp
 RM				=	@rm -vrf
@@ -75,11 +75,11 @@ $(MINILIBX):
 	$(MAKE) -C $(MINILIBX_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAG) $(MINILIBX_FLAGS) $(MATH_FLAGS) $^ -o $@
+	$(CC) $(CFLAG) $(MINILIBX_FLAGS) $(LINUX_FLAGS) $^ -o $@
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 	$(MKDIR) $(dir $@) $(dir $(GET_DEP_PATH))
-	$(CC) $(CFLAG) $(MINILIBX_FLAGS) $(MATH_FLAGS) -I $(INC_DIR) \
+	$(CC) $(CFLAG) $(MINILIBX_FLAGS) -I$(INC_DIR) \
 		-c $< -o $@ \
 		-MF $(DEP_DIR)/$(notdir $(basename $<)).d -MT $@
 

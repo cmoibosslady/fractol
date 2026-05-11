@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:13:29 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/10 16:08:15 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/11 11:37:01 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,24 @@ int	combine_color(t_rgb *color)
 	return (res);
 }
 
-void	give_nuance(t_rgb *color, int limit)
+int	give_nuance(int limit)
 {
-	ft_bzero(color, sizeof(t_rgb));
-	color->blue += 20 * limit;
+	t_rgb color;
+
+	ft_bzero(&color, sizeof(t_rgb));
+	color.blue += 20 * limit;
 	if (limit > 3)
-		color->green += 15 * limit;
+		color.green += 15 * limit;
 	if (limit > 10)
-		color->red += 15 * limit;
+		color.red += 15 * limit;
 	if (limit > 25)
-		color->blue += 10 * limit;
+		color.blue += 10 * limit;
 	if (limit > 50)
-		color->green += 10 * limit;
+		color.green += 10 * limit;
 	if (limit > 75)
-		color->red += 10 * limit;
-	if (limit > 100)
-		give_nuance(color, limit - 100);
+		color.red += 10 * limit;
+	if (limit > 100) 
+		give_nuance(limit - 100);
+	return (combine_color(&color));
+	// previously add taken out this line to make
 }

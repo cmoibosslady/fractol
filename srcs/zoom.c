@@ -6,53 +6,42 @@
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:58:10 by jlepany           #+#    #+#             */
-/*   Updated: 2025/02/28 11:24:38 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/11 11:47:36 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include "main.h"
+#include "zoom.h"
 
-void	zoom_out(t_img *image)
+void	adjust_zoom(t_xserv *server, int x, int y)
 {
-	image->x_min -= (image->x_max - image->x_min) * 0.25f;
-	image->y_min -= (image->y_max - image->y_min) * 0.25f;
-	image->x_max += (image->x_max - image->x_min) * 0.25f;
-	image->y_max += (image->y_max - image->y_min) * 0.25f;
+	double tmp;
+
+	tmp = server->x_min;
+	server->x_min = conversion(x - WIDTH / 2, server->x_min, server->x_max, WIDTH);
+	server->x_max = conversion(x + WIDTH / 2, tmp, server->x_max, WIDTH);
+	tmp = server->y_min;
+	server->y_min = conversion(y - HEIGHT / 2, server->y_min, server->y_max, HEIGHT);
+	server->y_max = conversion(y + HEIGHT / 2, tmp, server->y_max, HEIGHT);
+
 }
 
-void	zoom(t_img *img, int x, int y, bool zoom)
+void	zoom_out(t_xserv *server, int x, int y)
 {
-	double	tmp;
-
-	mlx_clear_window(img->mlx, img->win);
-	tmp = img->x_min;
-	img->x_min = conversion(x - WIDTH / 2, img->x_min, img->x_max, WIDTH);
-	img->x_max = conversion(x + WIDTH / 2, tmp, img->x_max, WIDTH);
-	tmp = img->y_min;
-	img->y_min = conversion(y - HEIGHT / 2, img->y_min, img->y_max, HEIGHT);
-	img->y_max = conversion(y + HEIGHT / 2, tmp, img->y_max, HEIGHT);
-	if (zoom)
-	{
-		img->x_min += (img->x_max - img->x_min) * 0.25f;
-		img->x_max -= (img->x_max - img->x_min) * 0.25f;
-		img->y_min += (img->y_max - img->y_min) * 0.25f;
-		img->y_max -= (img->y_max - img->y_min) * 0.25f;
-		img->zoom *= 0.5f;
-	}
-	else
-	{
-		zoom_out(img);
-		img->zoom *= 1.5f;
-	}
-	img->fract(img);
+	adjust_zoom(server, x, y);
+	server->x_min -= (server->x_max - server->x_min) * 0.25f;
+	server->y_min -= (server->y_max - server->y_min) * 0.25f;
+	server->x_max += (server->x_max - server->x_min) * 0.25f;
+	server->y_max += (server->y_max - server->y_min) * 0.25f;
+	server->zoom *= 1.5;
 }
 
-void	back_to_center(t_img *image)
+void	zoom_in(t_xserv *server, int x, int y)
 {
-	image->x_min = -2.5f;
-	image->y_min = -2.5f;
-	image->x_max = 2.5f;
-	image->y_max = 2.5f;
-	image->zoom = 1.0f;
-	image->fract(image);
+	adjust_zoom(server, x, y);
+	server->x_min += (server->x_max - server->x_min) * 0.25f;
+	server->x_max -= (server->x_max - server->x_min) * 0.25f;
+	server->y_min += (server->y_max - server->y_min) * 0.25f;
+	server->y_max -= (server->y_max - server->y_min) * 0.25f;
+	server->zoom *= 0.5f;
 }

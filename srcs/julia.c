@@ -6,13 +6,17 @@
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:24:32 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/10 19:22:18 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/11 11:38:09 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <unistd.h>
 
+#include "colors.h"
+#include "events.h"
 #include "julia.h"
+#include "libft.h"
 #include "mandelbrot.h"
 #include "mlx.h"
 
@@ -57,13 +61,12 @@ void	put_julia(t_xserv *server, t_cnb *seed, t_cnb *z)
 		y = -1;
 		while (++y < HEIGHT)
 		{
-			z->real = conversion(x, img->x_min, img->x_max, WIDTH);
-			z->unreal = conversion(y, img->y_min, img->y_max, HEIGHT);
-			limit = julia(z, seed);
-			put_pixel_image(server, adjust_color(limit, img), x, y);
+			z->real = conversion(x, server->x_min, server->x_max, WIDTH);
+			z->unreal = conversion(y, server->y_min, server->y_max, HEIGHT);
+			limit = inside_julia(z, seed);
+			put_pixel_image(server, give_nuance(limit), x, y);
 		}
 	}
-	free(z);
 }
 
 void	generate_julia(t_xserv *server)
@@ -72,8 +75,9 @@ void	generate_julia(t_xserv *server)
 
 	z.real = 0;
 	z.unreal = 0;
-	put_julia(server, seed, &z);
+	put_julia(server, &server->julia_seed, &z);
 	mlx_put_image_to_window(server->mlx_ptr, server->win_ptr, server->img_ptr, 0, 0);
+	write(1, "Done\n", 5);
 }
 
 void	init_julia(t_xserv *server, int ac, char **av)
@@ -81,11 +85,15 @@ void	init_julia(t_xserv *server, int ac, char **av)
 	t_cnb seed;
 	if (ac == 4)
 	{
-		seed.real = ft_atod(argv[2]);
-		seed.unreal = ft_atod(argv[3]);
+		seed.real = ft_atod(av[2]);
+		seed.unreal = ft_atod(av[3]);
 		if (complex_nan(&seed) == true)
 			stop_mlx(server);
 	}
-	events(image, image->win);
-	mlx_loop(image->mlx);
+	else {
+		seed.real = 1.0;
+		seed.unreal = 0.0;
+	}
+	server->julia_seed.real = seed.real;
+	server->julia_seed.unreal = seed.unreal;
 }

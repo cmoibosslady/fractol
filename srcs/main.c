@@ -6,16 +6,18 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:27 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/10 19:25:04 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/11 11:37:38 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 
 #include "events.h"
 #include "julia.h"
 #include "libft.h"
 #include "main.h"
+#include "mandelbrot.h"
 #include "mlx.h"
 
 double	conversion(int value, double d_min, double d_max, int v_max) 
@@ -54,6 +56,7 @@ int	stop_mlx(t_xserv *server)
 		mlx_destroy_window(server->mlx_ptr, server->win_ptr);
 	if (server->mlx_ptr)
 		mlx_destroy_display(server->mlx_ptr);
+	exit(0);
 }
 
 int main(int ac, char *av[])
@@ -64,19 +67,17 @@ int main(int ac, char *av[])
 		return (log_error("Too few arguments\n"));
 	ft_bzero(&server, sizeof(t_xserv));
 	if (!ft_strcmp(av[1], "mandelbrot"))
-	{
-		init_mandelbrot(&server);
-		server.generator = init_mandelbrot;
-	}
+		server.generator = generate_mandelbrot;
 	else if (!ft_strcmp(av[1], "julia"))
 	{
-		init_julia(&serv, ac, av);
+		init_julia(&server, ac, av);
 		server.generator = generate_julia;
 	}
 	else
 		return (log_error("Arg must be: mandelbrot or julia [x] [y]\n"));
 	if (init_mlx(&server) == false)
 		return (log_error("Cannot init mlx\n"));
+	server.generator(&server);
 	events(&server);
 	mlx_loop(server.mlx_ptr);
 }
