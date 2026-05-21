@@ -6,7 +6,7 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:19:44 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/11 11:37:11 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/21 03:35:40 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_bzero(void *mem, size_t size)
 	if (mem == 0)
 		return ;
 	while (i < size)
-		((char *)mem)[i] = '\0';
+		((char *)mem)[i++] = '\0';
 }
 
 int	ft_strcmp(const char *s1, const char *s2)

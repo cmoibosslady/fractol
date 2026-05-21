@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:57:25 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/21 09:03:06 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/21 03:40:39 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "colors.h"
 #include "complex_nb.h"
+#include "libft.h"
 #include "main.h"
 #include "mandelbrot.h"
 #include "mlx.h"
@@ -58,6 +59,7 @@ int	mandelbrot_limit(t_cnb *seed)
 	int		i;
 
 	i = 0;
+	ft_bzero(&z, sizeof(z));
 	while (inside_mandelbrot(&z, i) && i++ < 200 && !complex_nan(&z))
 		z = *add_complex(square_complex(&z), *seed);
 	return (i);
