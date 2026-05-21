@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
+/*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:24:32 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/11 11:38:09 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/21 09:02:23 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,6 @@
 #include "libft.h"
 #include "mandelbrot.h"
 #include "mlx.h"
-
-bool	inside_circle(t_cnb *z)
-{
-	double	tmp1;
-	double	tmp2;
-
-	tmp1 = z->real + 1.0f;
-	tmp1 = sqrt(tmp1);
-	tmp1 += sqrt(z->unreal);
-	tmp2 = 0.0645f;
-	if (tmp1 < tmp2)
-		return (true);
-	tmp1 = z->real - 0.25f;
-	tmp1 = sqrt(tmp1) + sqrt(z->unreal);
-	tmp2 = sqrt(tmp1) - 2 * tmp1 + 0.25f;
-	if (z->real < tmp2 - 0.01f)
-		return (true);
-	return (false);
-}
 
 int	inside_julia(t_cnb *z, t_cnb *seed)
 {

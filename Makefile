@@ -54,9 +54,19 @@ MINILIBX		=	$(MINILIBX_DIR)/libmlx.a
 CC				=	cc
 CFLAG			=	-Wall -Werror -Wextra \
 					-MMD -MP
+
+ifeq ($(shell uname), Darwin)
+	EXT_FLAGS		=	-lm
+	MINILIBX_DIR	=	minilibx-macos
+	RPATH_FLAGS	=	-Wl,-rpath,@loader_path/$(MINILIBX_DIR)
+else
+	EXT_FLAGS		=	-lm -lXext -lX11 -lmlx
+	MINILIBX_DIR	=	minilibx-linux
+	RPATH_FLAGS	=
+endif
+
 MINILIBX_FLAGS	=	-I$(MINILIBX_DIR)
 # FOR MACOS comment thoses falgs
-LINUX_FLAGS		=	-lm -lXext -lX11 -lmlx
 
 MKDIR			=	@mkdir -vp
 RM				=	@rm -vrf
@@ -75,7 +85,8 @@ $(MINILIBX):
 	$(MAKE) -C $(MINILIBX_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAG) $(MINILIBX_FLAGS) $(LINUX_FLAGS) $^ -o $@
+	$(CC) $(CFLAG) $(MINILIBX_FLAGS) $^ -o $@ \
+		-L$(MINILIBX_DIR) -lmlx $(EXT_FLAGS) $(RPATH_FLAGS)
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 	$(MKDIR) $(dir $@) $(dir $(GET_DEP_PATH))

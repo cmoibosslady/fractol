@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:27 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/11 11:37:38 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/21 09:00:09 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ int	stop_mlx(t_xserv *server)
 	if (server->win_ptr)
 		mlx_destroy_window(server->mlx_ptr, server->win_ptr);
 	if (server->mlx_ptr)
+	{
+#ifdef __linux__
 		mlx_destroy_display(server->mlx_ptr);
+#endif
+	}
 	exit(0);
 }
 
