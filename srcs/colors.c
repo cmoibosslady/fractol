@@ -47,7 +47,7 @@ int	give_nuance(int limit)
 	if (limit > 75)
 		color.red += 10 * limit;
 	if (limit > 100) 
-		give_nuance(limit - 100);
+		return (give_nuance(limit - 100));
 	return (combine_color(&color));
 	// previously add taken out this line to make
 }

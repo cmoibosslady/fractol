@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:57:25 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/21 03:40:39 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/05/21 09:47:03 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,9 @@ bool	inside_circle(t_cnb *z)
 
 bool	inside_mandelbrot(t_cnb *z, int i)
 {
-	if (sqrt(z->unreal) > 4)
+	if (i && (z->real * z->real + z->unreal * z->unreal) > 4.0)
 		return (false);
-	else if (sqrt(z->unreal) <= 4 && sqrt(z->real) >= 4)
-		return (false);
-	else if (i && abs_complex(z) > 2)
-		return (false);
-	else
-		return (true);
+	return (true);
 }
 
 int	mandelbrot_limit(t_cnb *seed)
