@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:57:25 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/21 09:47:03 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/04 17:23:56 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@ bool	inside_circle(t_cnb *z)
 		return false;
 }
 
-bool	inside_mandelbrot(t_cnb *z, int i)
+bool	inside_mandelbrot(t_cnb *z)
 {
-	if (i && (z->real * z->real + z->unreal * z->unreal) > 4.0)
+	if (z->real * z->real + z->unreal * z->unreal > 4.0)
+		return (false);
+	if (z->real * z->real >= 4 && z->unreal * z->unreal <= 4)
+		return (false);
+	if (abs_complex(z) > 2)
 		return (false);
 	return (true);
 }
@@ -55,7 +59,7 @@ int	mandelbrot_limit(t_cnb *seed)
 
 	i = 0;
 	ft_bzero(&z, sizeof(z));
-	while (inside_mandelbrot(&z, i) && i++ < 200 && !complex_nan(&z))
+	while (inside_mandelbrot(&z) && i++ < 200 && !complex_nan(&z))
 		z = *add_complex(square_complex(&z), *seed);
 	return (i);
 }
@@ -77,7 +81,10 @@ void	put_mandelbrot(t_xserv *server, t_cnb *seed)
 			if (inside_circle(seed))
 				limit = 200;
 			else
+			{
 				limit = mandelbrot_limit(seed);
+				/* printf("limit is %d\n", limit); */
+			}
 			put_pixel_image(server, give_nuance(limit), x, y);
 		}
 	}

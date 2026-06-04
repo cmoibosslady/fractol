@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:24:32 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/21 09:02:23 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/04 11:17:53 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	inside_julia(t_cnb *z, t_cnb *seed)
 	int	i;
 
 	i = 0;
-	while (inside_mandelbrot(z, i) && i++ < 200 && !complex_nan(z))
+	while (inside_mandelbrot(z) && i++ < 200 && !complex_nan(z))
 		z = add_complex(square_complex(z), *seed);
 	return (i);
 }

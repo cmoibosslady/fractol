@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:27 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/21 09:00:09 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/04 17:32:48 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,12 @@ bool	init_mlx(t_xserv *server)
 int	stop_mlx(t_xserv *server)
 {
 	if (server->img_ptr)
-		mlx_destroy_image(server->mlx_ptr, server->win_ptr);
+		mlx_destroy_image(server->mlx_ptr, server->img_ptr);
 	if (server->win_ptr)
 		mlx_destroy_window(server->mlx_ptr, server->win_ptr);
 	if (server->mlx_ptr)
-	{
-#ifdef __linux__
 		mlx_destroy_display(server->mlx_ptr);
-#endif
-	}
+	free(server->mlx_ptr);
 	exit(0);
 }
 
@@ -67,6 +64,10 @@ int main(int ac, char *av[])
 {
 	t_xserv	server;
 
+	server.x_min = -2.0;
+	server.x_max = 2.0;
+	server.y_min = -2.0;
+	server.y_max = 2.0;
 	if (ac < 2) 
 		return (log_error("Too few arguments\n"));
 	ft_bzero(&server, sizeof(t_xserv));
