@@ -6,15 +6,15 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:59 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/04 17:28:30 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/04 17:41:30 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
 
-# define HEIGHT 200
-# define WIDTH 200
+# define HEIGHT 600
+# define WIDTH 800
 
 # include <math.h>
 # include <stdbool.h>

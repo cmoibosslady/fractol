@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:27 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/04 17:32:48 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/04 17:34:40 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ int main(int ac, char *av[])
 {
 	t_xserv	server;
 
-	server.x_min = -2.0;
-	server.x_max = 2.0;
-	server.y_min = -2.0;
-	server.y_max = 2.0;
+	server.x_min = -2.5;
+	server.x_max = 2.5;
+	server.y_min = -2.5;
+	server.y_max = 2.5;
+	server.zoom = 1.0;
 	if (ac < 2) 
 		return (log_error("Too few arguments\n"));
 	ft_bzero(&server, sizeof(t_xserv));
