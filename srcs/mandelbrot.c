@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:57:25 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/04 17:42:06 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 17:06:20 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ bool	inside_circle(t_cnb *z)
 	double	cmp;
 
 	cmp = (z->real + 1) * (z->real + 1) + z->unreal * z->unreal;
-	if (cmp < 1/16.0)
-		return true;
+	if (cmp < 1/16.0) 
+		return (true);
 	else
-		return false;
+		return (false);
 }
 
 bool	inside_mandelbrot(t_cnb *z)
 {
-	if ((z->unreal * z->unreal) >4.0)
+	if ((z->unreal * z->unreal) > 4.0)
 		return (false);
 	else if ((z->unreal * z->unreal) <= 4.0 && (z->real * z->real) >= 4.0)
 		return (false);
-	else if (abs_complex(z) > 2)
+	else if (abs_complex(z) > 2.0)
 		return (false);
 	else
 		return (true);
@@ -82,10 +82,7 @@ void	put_mandelbrot(t_xserv *server, t_cnb *seed)
 			if (inside_circle(seed))
 				limit = 200;
 			else
-			{
 				limit = mandelbrot_limit(seed);
-				printf("limit is %d\n", limit);
-			}
 			put_pixel_image(server, give_nuance(limit), x, y);
 		}
 	}
