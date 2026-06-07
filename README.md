@@ -5,23 +5,17 @@ The goal of this project is to simulate two types of fractal, the [Mandelbrot](h
 
 ### Warnings
 
-Due to lack of maintenance, the MiniLibX does not run on all Unix platform. This project was tested on macOS and RaspberryPiOS (with Raspberry Pi 5) with X11.
+Due to lack of maintenance, the MiniLibX does not run on all Unix platform. This project was tested on Debian bookworm. To ensure compatibility a Docker container is provided
 
 ### How to use
-Download the correct version of the MiniLibX (macOS or Linux), compile the project and the MiniLibX and run the binary with: 
+Install Docker with Docker Engine. Install X11.  
+Boot the Docker container using docker compose.
 ```bash
-make
+xhost + 127.0.0.1
 ```
-
-Delete the objects with: 
-``` bash
-make clean
-```
-Delete the objects, the binary and the MinilibX with:
 ```bash
-make fclean
+docker compose -d --build up
 ```
-
 ### Commands
 
 Inside the X window, the key arrows (up, down, left, right) can be used to change the view of the fractal. The mouse/trackpad scroll can be use to zoom in and out of the fractal.
