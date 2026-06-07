@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:29:59 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/04 17:37:05 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 18:23:27 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ double	abs_complex(t_cnb *z)
 	double	res;
 
 	res = z->real * z->real + z->unreal * z->unreal;
-	res = sqrt(res);
 	return (res);
 }
 

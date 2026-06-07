@@ -53,7 +53,7 @@ MINILIBX		=	$(MINILIBX_DIR)/libmlx.a
 
 CC				=	cc
 CFLAG			=	-Wall -Werror -Wextra \
-					-MMD -MP -g3
+					-MMD -MP -g3 -O3 -ffast-math
 
 ifeq ($(shell uname), Darwin)
 	EXT_FLAGS		=	-lm

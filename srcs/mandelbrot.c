@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:57:25 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/07 18:17:53 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 18:23:42 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	inside_mandelbrot(t_cnb *z)
 		return (false);
 	else if ((z->unreal * z->unreal) <= 4.0 && (z->real * z->real) >= 4.0)
 		return (false);
-	else if (abs_complex(z) > 2.0)
+	else if (abs_complex(z) > 4.0)
 		return (false);
 	else
 		return (true);

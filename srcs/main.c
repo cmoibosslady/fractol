@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:27 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/07 18:13:21 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 18:27:20 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int main(int ac, char *av[])
 		return (log_error("Arg must be: mandelbrot or julia [x] [y]\n"));
 	if (init_mlx(&server) == false)
 		return (log_error("Cannot init mlx\n"));
+	server.generator(&server);
 	events(&server);
-	mlx_loop_hook(server.mlx_ptr, server.generator, &server);
 	mlx_loop(server.mlx_ptr);
 }
