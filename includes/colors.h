@@ -6,7 +6,7 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 11:35:09 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/11 11:16:16 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 17:16:48 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "main.h"
 
 typedef struct colors_rgb {
-	unsigned char	t;
-	unsigned char	red;
-	unsigned char	green;
-	unsigned char	blue;
+	unsigned int	t;
+	unsigned int	red;
+	unsigned int	green;
+	unsigned int	blue;
 } 	t_rgb;
 
 int		combine_color(t_rgb *color);

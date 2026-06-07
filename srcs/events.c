@@ -6,7 +6,7 @@
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:58:52 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/04 13:11:10 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 18:17:12 by jlepany          ###   ########.fr       */
 /*                                                            	              */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	mousehook(int mousecode, int x, int y, void *ptr)
 	
 	server = (t_xserv *)ptr;
 	if (mousecode == 4)
-		zoom_in(server->img_ptr, x, y);
+		zoom_in(server, x, y);
 	if (mousecode == 5)
-		zoom_out(server->img_ptr, x, y);
+		zoom_out(server, x, y);
 	mlx_clear_window(server->mlx_ptr, server->win_ptr);
 	server->generator(server);
 	return (0);

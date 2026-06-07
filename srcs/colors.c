@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:13:29 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/06 07:14:04 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 18:03:33 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,26 @@ int	combine_color(t_rgb *color)
 	return (res);
 }
 
-int	give_nuance(int limit)
+int	give_nuance(int escape_count)
 {
 	t_rgb color;
+	double normalized_count;
+	const double frequency = 25.0;
 
+	if (escape_count == MAX_ITERATIONS) {
+        return 0x000000;
+    }
 	ft_bzero(&color, sizeof(t_rgb));
-	color.blue += 20 * limit;
-	if (limit > 3)
-		color.green += 15 * limit;
-	if (limit > 10)
-		color.red += 15 * limit;
-	if (limit > 25)
-		color.blue += 10 * limit;
-	if (limit > 50)
-		color.green += 10 * limit;
-	if (limit > 75)
-		color.red += 10 * limit;
-	if (limit > 100) 
-		return (give_nuance(limit - 100));
+	normalized_count = (double)escape_count / MAX_ITERATIONS;
+
+	color.red = (int)(sin(frequency * normalized_count + 1.0) / 2.0 * 255.0);
+	color.blue = (int)((cos(frequency * normalized_count * 0.8) + 1.0) / 2.0 * 255.0);
+	color.green = (int)((sin(frequency * normalized_count * 1.5) + 1.0) / 2.0 * 255.0);
+	if (color.red > 255)
+		color.red = 255;
+	if (color.green > 255)
+		color.green = 255;
+	if (color.blue > 255)
+		color.blue = 255;
 	return (combine_color(&color));
-	// previously add taken out this line to make
 }

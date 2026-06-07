@@ -6,7 +6,7 @@
 /*   By: jlepany <marvin@42.f>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:24:32 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/04 11:17:53 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 18:17:48 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	put_julia(t_xserv *server, t_cnb *seed, t_cnb *z)
 	}
 }
 
-void	generate_julia(t_xserv *server)
+int	generate_julia(t_xserv *server)
 {
 	t_cnb	z;
 
@@ -58,7 +58,7 @@ void	generate_julia(t_xserv *server)
 	z.unreal = 0;
 	put_julia(server, &server->julia_seed, &z);
 	mlx_put_image_to_window(server->mlx_ptr, server->win_ptr, server->img_ptr, 0, 0);
-	write(1, "Done\n", 5);
+	return (0);
 }
 
 void	init_julia(t_xserv *server, int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: jlepany <jlepany@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 10:18:59 by jlepany           #+#    #+#             */
-/*   Updated: 2026/06/04 17:41:30 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 18:14:51 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # define HEIGHT 600
 # define WIDTH 800
+# define MAX_ITERATIONS 200
+# define ZOOM_FACTOR_IN  0.5f
+# define ZOOM_FACTOR_OUT 1.5f
 
 # include <math.h>
 # include <stdbool.h>
@@ -27,7 +30,7 @@ typedef struct x_server
 	void	*win_ptr;
 	void	*img_ptr;
 
-	void	(*generator)(struct x_server *server);
+	int	(*generator)(struct x_server *server);
 
 	char	*data;
 	int		bit;

@@ -6,7 +6,7 @@
 /*   By: jlepany <jlepany@student.42,fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 23:35:28 by jlepany           #+#    #+#             */
-/*   Updated: 2026/05/11 11:47:55 by jlepany          ###   ########.fr       */
+/*   Updated: 2026/06/07 17:18:44 by jlepany          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void	back_to_center(t_xserv *server)
 	server->x_min = -2.5;
 	server->y_max = 2.5;
 	server->x_max = 2.5;
+	server->zoom = 1.0;
 }
